@@ -32,7 +32,7 @@ export default class ApiResource {
         return (new this()).destroy(id)
     }
 
-    // -----------
+    // ----- Getter
 
     getResponse() {
         return this.#response
@@ -42,14 +42,16 @@ export default class ApiResource {
         return this.#baseUrl;
     }
 
+    getResource() {
+        return this.#urlResource;
+    }
+
+    // ------ Setter
+
     baseUrl(value) {
         this.#baseUrl = value
 
         return this
-    }
-
-    getResource() {
-        return this.#urlResource;
     }
 
     resource(resource) {
@@ -63,6 +65,8 @@ export default class ApiResource {
 
         return this
     }
+
+    // ------- Simple functions
 
     async get() {
         return await this.query(this.#path())
