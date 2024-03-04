@@ -3,7 +3,7 @@ import axios from "axios"
 export default class ApiResource {
     #baseUrl = import.meta.env.VITE_API_RESOURCE_BASE_URL ?? ''
     #urlParams = {}
-    #urlResource = null
+    _urlResource = null
     #response = {}
 
     // Alias static methods
@@ -47,7 +47,7 @@ export default class ApiResource {
     }
 
     getResource() {
-        return this.#urlResource;
+        return this._urlResource;
     }
 
     getPath() {
@@ -63,7 +63,7 @@ export default class ApiResource {
     }
 
     resource(resource) {
-        this.#urlResource = resource
+        this._urlResource = resource
 
         return this
     }
@@ -139,8 +139,8 @@ export default class ApiResource {
     }
 
     #path() {
-        return this.#urlResource
-            ? this.#baseUrl + '/' + this.#urlResource
+        return this._urlResource
+            ? this.#baseUrl + '/' + this._urlResource
             : this.#baseUrl
     }
 }
