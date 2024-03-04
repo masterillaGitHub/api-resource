@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default class ApiResource {
-    #baseUrl = '/api/v2'
+    #baseUrl = import.meta.env.VITE_APP_BASE_URL ?? ''
     #urlParams = {}
     #urlResource = null
     #response = {}
