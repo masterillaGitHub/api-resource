@@ -1,12 +1,16 @@
 import axios from "axios"
 
 export default class ApiResource {
-    #baseUrl = import.meta.env.VITE_APP_BASE_URL ?? ''
+    #baseUrl = import.meta.env.VITE_API_RESOURCE_BASE_URL ?? ''
     #urlParams = {}
     #urlResource = null
     #response = {}
 
     // Alias static methods
+
+    static baseUrl(url) {
+        return (new this()).baseUrl(url)
+    }
 
     static params(params) {
         return (new this()).params(params)
@@ -46,6 +50,10 @@ export default class ApiResource {
         return this.#urlResource;
     }
 
+    getPath() {
+        return this.#path()
+    }
+
     // ------ Setter
 
     baseUrl(value) {
@@ -73,9 +81,7 @@ export default class ApiResource {
     }
 
     async find(id) {
-        let response = await this.query(`${this.#path()}/${id}`)
-
-        return response.data
+        return await this.query(`${this.#path()}/${id}`)
     }
 
     async store(data) {
